@@ -7,9 +7,9 @@ def debug(content):
     print(type(content), content)
 
 class Analysis():
-    def __init__(self, dir='-d ./dic/mecab-ipadic-neologd'):
+    def __init__(self, dir='./dic/mecab-ipadic-neologd'):
         # 辞書を選択
-        self.mecab = MeCab.Tagger(os.path.join(os.path.dirname(__file__), dir))
+        self.mecab = MeCab.Tagger('-d' + os.path.join(os.path.dirname(__file__), dir))
 
     def main(self, text_list):
         # 単語に分解
@@ -47,4 +47,4 @@ if __name__ == '__main__':
     analysis = Analysis()
     result = analysis.main(sample_text_list)
 
-    debug(result) # => ['庭', '俺', '齋藤', '飛鳥', '嫁']
+    debug(result) # => ['庭', '齋藤飛鳥', '俺の嫁', '俺']
