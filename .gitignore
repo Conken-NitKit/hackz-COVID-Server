@@ -1,2 +1,3 @@
 analysis/dic
-firebase/cred.json
+cred.json
+__pycache__/
