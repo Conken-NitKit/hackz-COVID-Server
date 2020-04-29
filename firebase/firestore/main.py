@@ -57,7 +57,7 @@ class FireStore:
     })
     return meeting_id
 
-  def add_user(self, meeting_id: str, user_id: str) -> {}:
+  def add_user(self, meeting_id: str, user_id: str) -> str:
     meeting_ref = self.id_to_ref(collection='Meetings' ,id=meeting_id)
     user_ref = self.id_to_ref(collection='Users', id=user_id)
 
