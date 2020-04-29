@@ -30,7 +30,7 @@ class FireStore:
 
     return response[1].get().id
 
-  def init_meeting(self, title: str, owner_id: str) -> str:
+  def init_meeting(self, title: str, discription: str, owner_id: str) -> str:
     
     owner_ref = self.id_to_ref(collection='Users', id=owner_id)
     # 管理者の名前を取得
@@ -45,7 +45,8 @@ class FireStore:
         'id': owner_ref.get().id
       },
       'records': [],
-      'title': title
+      'title': title,
+      'discription': discription
     })
     # 管理者の管理ミーティングを追加
     meeting_id = response[1].get().id
