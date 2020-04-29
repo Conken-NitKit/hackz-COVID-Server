@@ -57,12 +57,6 @@ class FireStore:
     })
     return meeting_id
 
-  def get_users(self, meeting_id: str) -> {}:
-    return self.id_to_data(collection='Meetings', id=meeting_id)
-
-  def get_meetings(self, user_id: str) -> {}:
-    return self.id_to_data(collection='Users', id=user_id)
-
   def add_user(self, meeting_id: str, user_id: str) -> {}:
     meeting_ref = self.id_to_ref(collection='Meetings' ,id=meeting_id)
     user_ref = self.id_to_ref(collection='Users', id=user_id)
@@ -133,5 +127,5 @@ if __name__ == '__main__':
   my_firestore.add_black_list(meeting_id=meeting_id, black_words= ['b', 'c'])
   my_firestore.update_keywords(meeting_id=meeting_id, keywords= ['b', 'c', 'aaa'])
 
-  print(my_firestore.get_meetings(user_id=user_id))
-  print(my_firestore.get_users(meeting_id=meeting_id))
+  print(my_firestore.get_my_meetings(user_id=user_id))
+  print(my_firestore.get_joining_users(meeting_id=meeting_id))
