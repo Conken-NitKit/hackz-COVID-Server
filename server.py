@@ -48,9 +48,10 @@ def init_user():
 def init_meeting() -> {}:
   req = json.loads(request.get_data().decode())
   title = req['title']
+  discription = req['discription']
   owner_id = req['owner_id']
 
-  return firestore.init_meeting(title=title, owner_id=owner_id)
+  return firestore.init_meeting(title=title, discription=discription, owner_id=owner_id)
 
 # ミーティングへのユーザーの追加
 @app.route('/meetings/add_user', methods=['POST'])
