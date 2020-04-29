@@ -10,7 +10,8 @@ def debug(content):
 class Analysis():
     def __init__(self, dir=u'./dic/mecab-ipadic-neologd'):
         # 辞書を選択
-        self.mecab = MeCab.Tagger(u'-d' + os.path.join(os.path.dirname(__file__), dir))
+        # self.mecab = MeCab.Tagger(u'-d' + os.path.join(os.path.dirname(__file__), dir))
+        self.mecab = MeCab.Tagger('-d ' + dir)
 
     def main(self, text_list):
         # 単語に分解
