@@ -36,12 +36,24 @@ def get_joining_users(meeting_id: str) -> {}:
 
 # ユーザーの新規登録
 # ユーザー名 -> ユーザーID
-@app.route('/users/init', methods=['POST'])
-def init_user():
+@app.route('/users/sign_up', methods=['POST'])
+def sign_up():
   req = json.loads(request.get_data().decode())
   name = req['name']
+  email = req['email']
+  passward = req['passward']
 
-  return firestore.init_user(name=name)
+  print(name, email, passward)
+
+  return firestore.sign_up(name=name, email=email, passward=passward)
+
+@app.route('/users/sign_in', methods=['POST'])
+def sign_in():
+  req = json.loads(request.get_data().decode())
+  email = req['email']
+  passward = req['passward']
+
+  return firestore.sign_in(email=email, passward=passward)
 
 # ミーティングの新規作成
 @app.route('/meetings/init', methods=['POST'])

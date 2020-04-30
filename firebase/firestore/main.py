@@ -20,7 +20,13 @@ class FireStore:
   def id_to_data(self, collection: str, id: str) -> {}:
     return self.db.collection(collection).document(id).get().to_dict()
 
-  def init_user(self, name: str) -> str:
+  def sign_up(self, name: str, email: str, passward: str) -> str:
+    # 既に存在するユーザーでないか確認
+    response = self.db.collection('Auth').where('email', '==', email).where('passward', '==', passward)
+    id_list = [i.id for i in response.stream()]
+    if not (len(id_list) is 0):
+      return '既に存在するユーザーです'
+
     # ユーザーを登録
     response = self.db.collection('Users').add({
       'meeting': [],
@@ -28,7 +34,21 @@ class FireStore:
       'name': name
     })
 
-    return response[1].get().id
+    user_id = response[1].get().id
+    self.db.collection('Auth').add({
+      'email': email,
+      'passward': passward,
+      'user_id': user_id
+    })
+
+    return user_id
+
+  def sign_in(self, email: str, passward: str) -> str:
+    response = self.db.collection('Auth').where('email', '==', email).where('passward', '==', passward)
+    id_list = [i.id for i in response.stream()] 
+    if len(id_list) is 0:
+      return '存在しないユーザーです'
+    return id_list[0]
 
   def init_meeting(self, title: str, discription: str, owner_id: str) -> str:
     
