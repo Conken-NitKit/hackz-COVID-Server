@@ -50,7 +50,7 @@ class FireStore:
       return '存在しないユーザーです'
     return id_list[0]
 
-  def init_meeting(self, title: str, discription: str, owner_id: str) -> str:
+  def init_meeting(self, title: str, description: str, owner_id: str) -> str:
     
     owner_ref = self.id_to_ref(collection='Users', id=owner_id)
     # 管理者の名前を取得
@@ -66,7 +66,7 @@ class FireStore:
       },
       'records': [],
       'title': title,
-      'discription': discription
+      'description': description
     })
     # 管理者の管理ミーティングを追加
     meeting_id = response[1].get().id
