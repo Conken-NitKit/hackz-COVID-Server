@@ -53,7 +53,9 @@ def sign_in():
   email = req['email']
   passward = req['passward']
 
-  return firestore.sign_in(email=email, passward=passward)
+  auth_id = firestore.sign_in(email=email, passward=passward)
+  
+  return firestore.id_to_data(collection='Auth', id=auth_id)['user_id']
 
 # ミーティングの新規作成
 @app.route('/meetings/init', methods=['POST'])
